@@ -4,5 +4,7 @@
     <string name="app_name">Ziti2</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="shuru">请输入少于25字的中文</string>
+    <string name="confirm">确认</string>
 
 </resources>
