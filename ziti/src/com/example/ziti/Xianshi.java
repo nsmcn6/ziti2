@@ -64,6 +64,17 @@ public Xianshi(Context context, AttributeSet attrs) {
 	}
 	
 	void Go() {
+		//初始化
+		li=5;
+//		 对所有元素进行清理
+		for (int x = 0; x < li; x++) {
+			System.out.println("Go for x:"+x);
+			for (int y = 0; y < li; y++) {
+				cardsMap[x][y].setText("");//出了什么问题呢
+			}
+		}
+		
+		System.out.println("Xianshi.java>tongGo> srlength:"+srlength+" hang:"+hang+" li:"+li);
 		txt = etzt.getText().toString();
 		System.out.println(txt);
 		srlength=txt.length();
@@ -73,16 +84,7 @@ public Xianshi(Context context, AttributeSet attrs) {
 		if(srlength%li!=0){
 			hang=hang+1;
 		}
-		System.out.println("Xianshi.java>Go> srlength:"+srlength+" hang:"+hang+" li:"+li);
-		// 对所有元素进行清理
-//		for (int x = 0; x < li; x++) {
-//			System.out.println("Go for x:"+x);
-//			for (int y = 0; y < li; y++) {
-//				System.out.println("Go for y:"+y);
-//				cardsMap[x][y].setText(n+"");//出了什么问题呢
-//				System.out.println("Go for yset:"+y);
-//			}
-//		}
+		System.out.println("Xianshi.java>guoGo> srlength:"+srlength+" hang:"+hang+" li:"+li);
 //		清理完后执行按要求添加文字
 		addText();
 	}
@@ -90,14 +92,17 @@ public Xianshi(Context context, AttributeSet attrs) {
 		char[] tc=txt.toCharArray();
 		
 		for (int y = 1; y <=hang; y++) {
-			
-			if(y==hang){
-				li=hang%srlength;
+			if(y==hang){//在尾行
+				if(srlength%li!=0){//且不是最后一个字的时候li要这样计算
+					li=srlength%li;
+				}
 			}
+			System.out.println("for hang:"+hang+" li:"+li);
 			for (int x =1; x <= li; x++) {
-				if(x+y>=2){//至少有一行一列才给它运行
-					System.out.println("addText：>tc[x+y]:"+tc[x+y-2]+" hang:"+hang+" li:"+li);
-					cardsMap[x-1][y-1].setText(tc[x+y-2]+"");
+				int zi= 5*(y-1)+x-1;
+				if(zi>=0){//至少有一行一列才给它运行
+					System.out.println("addText>tc[x+y]:"+tc[zi]+" hang:"+hang+" li:"+li);
+					cardsMap[x-1][y-1].setText(tc[zi]+"");
 //					cardsMap是从零开始计算的
 					//这步出了问题：解决：一定要加字符让他变成字符串
 				}

@@ -15,7 +15,7 @@ public class Card extends FrameLayout {
 	public Card(Context context) {
 		super(context);
 		lable= new TextView(getContext());
-		lable.setTextSize(32);
+		lable.setTextSize(50);
 		lable.setGravity(Gravity.CENTER);
 		Drawable tvDrawable = getResources().getDrawable(R.drawable.danbiankegai200); 
 		lable.setBackground(tvDrawable);
