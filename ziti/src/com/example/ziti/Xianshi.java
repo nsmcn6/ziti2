@@ -27,7 +27,7 @@ public Xianshi(Context context, AttributeSet attrs) {
 	private Card[][] cardsMap=new Card[li][li];
 	static String txt;
 	private int srlength=0;
-	private int hang;
+	private int hang=li;
 	static EditText etzt;
 	
 /*	public Xianshi(Context context, AttributeSet attrs, int defStyle) {
@@ -53,23 +53,27 @@ public Xianshi(Context context, AttributeSet attrs) {
 	
 	private void addCards(int cardWidth,int cardHeight){
 		Card c;
-		for (int y = 0; y < hang; y++) {
-			for (int x = 0; x < li; x++) {
+		System.out.println("addCards hang:"+hang+" li:"+li);
+		for (int y = 1; y <= hang; y++) {
+			for (int x = 1; x <= li; x++) {
 				c= new Card(getContext());
 				addView(c,cardWidth,cardWidth);
-				cardsMap[x][y]=c;
+				cardsMap[x-1][y-1]=c;
 			}
 		}
 	}
 	
 	void Go() {
-		//让格子每过五格换行
-		hang=li;
+		txt = etzt.getText().toString();
+		System.out.println(txt);
+		srlength=txt.length();
+		
+		hang=srlength/li;
+//		如果有余数，就让行加一
 		if(srlength%li!=0){
 			hang=hang+1;
-			System.out.println("if Go");
 		}
-		System.out.println("Go");
+		System.out.println("Xianshi.java>Go> srlength:"+srlength+" hang:"+hang+" li:"+li);
 		// 对所有元素进行清理
 //		for (int x = 0; x < li; x++) {
 //			System.out.println("Go for x:"+x);
@@ -83,17 +87,20 @@ public Xianshi(Context context, AttributeSet attrs) {
 		addText();
 	}
 	private void addText() {
-		String txt = etzt.getText().toString();
-		System.out.println(txt);
-		srlength=txt.length();
 		char[] tc=txt.toCharArray();
 		
-		for (int y = 0; y < hang; y++) {
-			for (int x = 0; x < li; x++) {
-					System.out.println("addText y:"+tc[x+y]);
-					cardsMap[x][y].setText(tc[x+y]+"");
+		for (int y = 1; y <=hang; y++) {
+			
+			if(y==hang){
+				li=hang%srlength;
+			}
+			for (int x =1; x <= li; x++) {
+				if(x+y>=2){//至少有一行一列才给它运行
+					System.out.println("addText：>tc[x+y]:"+tc[x+y-2]+" hang:"+hang+" li:"+li);
+					cardsMap[x-1][y-1].setText(tc[x+y-2]+"");
+//					cardsMap是从零开始计算的
 					//这步出了问题：解决：一定要加字符让他变成字符串
-				
+				}
 			}
 		}
 	}
